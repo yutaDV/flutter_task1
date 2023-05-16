@@ -8,54 +8,81 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget titleSection = Container(
-      padding: const EdgeInsets.all(32),
-      child: Row(
-        children: [
-          Expanded(
-            /*1*/
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                /*2*/
-                Container(
-                  padding: const EdgeInsets.only(bottom: 8),
-                  child: const Text(
-                    'Oeschinen Lake Campground',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                Text(
-                  'Kandersteg, Switzerland',
-                  style: TextStyle(
-                    color: Colors.grey[500],
-                  ),
-                ),
-              ],
-            ),
-          ),
-          /*3*/
-          Icon(
-            Icons.star,
-            color: Colors.red[500],
-          ),
-          const Text('41'),
-        ],
-      ),
-    );
+
+   Widget titleSection = Positioned(
+     bottom: 0,
+     left: 16,
+     right: 16,
+     child: Container(
+       padding: const EdgeInsets.all(16),
+       decoration: BoxDecoration(
+         color: Colors.black.withOpacity(0.7),
+         borderRadius: BorderRadius.only(
+           topLeft: Radius.circular(16),
+           topRight: Radius.circular(16),
+         ),
+       ),
+       child: Row(
+         children: [
+           Expanded(
+             child: Column(
+               crossAxisAlignment: CrossAxisAlignment.start,
+               children: [
+                 Container(
+                   padding: const EdgeInsets.only(bottom: 8),
+                   child: const Text(
+                     'Oeschinen Lake Campground',
+                     style: TextStyle(
+                       fontWeight: FontWeight.bold,
+                       color: Colors.white,
+                     ),
+                   ),
+                 ),
+                 Text(
+                   'Kandersteg, Switzerland',
+                   style: TextStyle(
+                     color: Colors.grey[500],
+                   ),
+                 ),
+               ],
+             ),
+           ),
+           Icon(
+             Icons.star,
+             color: Colors.red[500],
+           ),
+           const Text(
+             '41',
+             style: TextStyle(
+               color: Colors.white,
+             ),
+           ),
+
+         ],
+       ),
+     ),
+   );
 
     Color color = Theme.of(context).primaryColor;
 
-    Widget buttonSection = Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        _buildButtonColumn(color, Icons.call, 'CALL'),
-        _buildButtonColumn(color, Icons.near_me, 'ROUTE'),
-        _buildButtonColumn(color, Icons.share, 'SHARE'),
-      ],
+    Widget buttonSection = Positioned(
+      top: 16,
+      right: 16,
+      child: Container(
+        color: Colors.white.withOpacity(0.7), // Напівпрозорий білий фон
+        padding: EdgeInsets.all(16.0),
+        child: Row(
+          children: [
+            _buildButtonColumn(Colors.blue, Icons.call, 'CALL'),
+            SizedBox(width: 16),
+            _buildButtonColumn(Colors.green, Icons.near_me, 'ROUTE'),
+            SizedBox(width: 16),
+            _buildButtonColumn(Colors.black, Icons.share, 'SHARE'),
+          ],
+        ),
+      ),
     );
+
 
     Widget textSection = const Padding(
       padding: EdgeInsets.all(32),
@@ -76,7 +103,7 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Flutter layout demo'),
         ),
-        body: ListView(
+        body: Stack(
             children: [
             Image.asset(
               'image/lake.jpg',
@@ -86,7 +113,7 @@ class MyApp extends StatelessWidget {
             ),
               titleSection,
               buttonSection,
-              textSection,
+              //textSection,
           ]
         ),
       ),
