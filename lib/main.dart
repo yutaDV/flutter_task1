@@ -97,26 +97,54 @@ class MyApp extends StatelessWidget {
       ),
     );
 
-    return MaterialApp(
+   Widget buildImageStack(int imageNumber) {
+     return Stack(
+       children: [
+         Image.asset(
+           'image/lake.jpg',
+           width: 600,
+           height: 240,
+           fit: BoxFit.cover,
+         ),
+         titleSection,
+         buttonSection,
+         Positioned(
+           top: 16,
+           left: 16,
+           child: Container(
+             width: 72,
+             height: 72,
+             decoration: BoxDecoration(
+               color: Colors.black.withOpacity(0.8),
+               shape: BoxShape.circle,
+             ),
+             child: Center(
+               child: Text(
+                 '#$imageNumber.',
+                 style: TextStyle(
+                   color: Colors.white,
+                   fontSize: 24,
+                   fontWeight: FontWeight.bold,
+                 ),
+               ),
+             ),
+           ),
+         ),
+       ],
+     );
+   }
+
+
+   return MaterialApp(
       title: 'Flutter layout demo',
       home: Scaffold(
         appBar: AppBar(
           title: const Text('Flutter layout demo'),
         ),
-        body: Stack(
-            children: [
-            Image.asset(
-              'image/lake.jpg',
-              width: 600,
-              height: 240,
-              fit: BoxFit.cover,
-            ),
-              titleSection,
-              buttonSection,
-              //textSection,
-          ]
+        body:  ListView(
+          children: List.generate(20, (index) => buildImageStack(index + 1)),
+          ),
         ),
-      ),
     );
   }
 
